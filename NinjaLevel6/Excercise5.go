@@ -1,23 +1,36 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 type Square struct {
+	length float64
 }
 type Circle struct {
+	radius float64
+}
+type Shape interface {
+	calculateArea() float64
 }
 
-func (p Person) speak() {
-	fmt.Printf("My name is %s, and my age is %v", p.first, p.age)
+func (s Square) calculateArea() float64 {
+	return s.length * s.length
+}
+
+func (c Circle) calculateArea() float64 {
+	return math.Pi * (c.radius * c.radius)
+}
+
+func info(s Shape) {
+	fmt.Println(s.calculateArea())
 }
 
 func main() {
-	p := Person{
-		first: "Pablo",
-		last:  "Nuñez",
-		age:   40,
-	}
-	fmt.Println(p)
+	circ := Circle{radius: 12.34567}
+	squa := Square{length: 22}
 
-	p.speak()
+	info(circ)
+	info(squa)
 }
